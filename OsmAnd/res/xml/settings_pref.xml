@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
 	<ListPreference android:summary="@string/settings_preset_descr" android:title="@string/settings_preset" android:key="application_mode"></ListPreference>
-
 
 	<PreferenceScreen android:key="map_settings" android:title="@string/rendering_settings" android:summary="@string/rendering_settings_descr">
 		<CheckBoxPreference android:summary="@string/map_vector_data_descr" android:title="@string/map_vector_data"
@@ -41,17 +39,19 @@
 		<ListPreference android:summary="@string/save_track_interval_descr" android:title="@string/save_track_interval"
 			android:key="save_track_interval"></ListPreference>
 		<Preference android:summary="@string/save_current_track_descr" android:title="@string/save_current_track" android:key="save_current_track"></Preference>
+		<PreferenceCategory android:title="@string/osmand_service">
+			<CheckBoxPreference android:summary="@string/background_router_service_descr" android:title="@string/background_router_service"
+				android:key="service_off_enabled"></CheckBoxPreference>
+			<ListPreference android:key="service_off_provider" android:title="@string/background_service_provider" android:summary="@string/background_service_provider_descr"></ListPreference>
+			<ListPreference android:key="service_off_interval" android:title="@string/background_service_int" android:summary="@string/background_service_int_descr"></ListPreference>
+			<ListPreference android:key="service_off_wait_interval" android:title="@string/background_service_wait_int"
+				android:summary="@string/background_service_wait_int_descr"></ListPreference>
+		</PreferenceCategory>
 	</PreferenceScreen>
 
 
-	<PreferenceScreen android:title="@string/osmand_service" android:summary="@string/osmand_service_descr">
-		<CheckBoxPreference android:summary="@string/background_router_service_descr" android:title="@string/background_router_service"
-			android:key="service_off_enabled"></CheckBoxPreference>
-		<ListPreference android:key="service_off_provider" android:title="@string/background_service_provider" android:summary="@string/background_service_provider_descr"></ListPreference>
-		<ListPreference android:key="service_off_interval" android:title="@string/background_service_int" android:summary="@string/background_service_int_descr"></ListPreference>
-		<ListPreference android:key="service_off_wait_interval" android:title="@string/background_service_wait_int"
-			android:summary="@string/background_service_wait_int_descr"></ListPreference>
-	</PreferenceScreen>
+	<!-- PreferenceScreen android:title="@string/osmand_service" android:summary="@string/osmand_service_descr">
+	</PreferenceScreen-->
 	
 
 	<PreferenceScreen android:key="routing_settings" android:title="@string/routing_settings" android:summary="@string/routing_settings_descr">
@@ -91,5 +91,4 @@
 		<EditTextPreference android:title="@string/user_password" android:password="true" android:summary="@string/user_password_descr"
 			android:key="user_password"></EditTextPreference>
 	</PreferenceScreen>
-
 </PreferenceScreen>

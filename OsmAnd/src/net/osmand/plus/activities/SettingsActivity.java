@@ -48,6 +48,8 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
+import com.bidforfix.andorid.BidForFixHelper;
+
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
 	
 	public static final String INTENT_KEY_SETTINGS_SCREEN = "INTENT_KEY_SETTINGS_SCREEN";
@@ -78,8 +80,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private Map<String, OsmandPreference<Integer>> seekBarPreferences = new LinkedHashMap<String, OsmandPreference<Integer>>();
 	
 	private Map<String, Map<String, ?>> listPrefValues = new LinkedHashMap<String, Map<String, ?>>();
-	
-	
 	
 	private void registerBooleanPreference(OsmandPreference<Boolean> b, PreferenceScreen screen){
 		CheckBoxPreference p = (CheckBoxPreference) screen.findPreference(b.getId());
@@ -153,6 +153,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		String[] entrieValues;
 		PreferenceScreen screen = getPreferenceScreen();
 		osmandSettings = OsmandSettings.getOsmandSettings(this);
+
+		BidForFixHelper bidForFixHelper = getMyApplication().getBidForFix();
+		bidForFixHelper.generatePreferenceList(screen, getString(R.string.support_new_features), this);
 		
 		registerBooleanPreference(osmandSettings.SHOW_VIEW_ANGLE,screen); 
 	    registerBooleanPreference(osmandSettings.USE_TRACKBALL_FOR_MOVEMENTS,screen); 

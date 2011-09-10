@@ -12,9 +12,9 @@ import java.util.Locale;
 
 import net.osmand.Algoritms;
 import net.osmand.FavouritePoint;
-import net.osmand.LogUtil;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.LogUtil;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandSettings;
@@ -40,6 +40,8 @@ import android.text.format.DateFormat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.bidforfix.andorid.BidForFixHelper;
+
 public class OsmandApplication extends Application {
 	public static final String EXCEPTION_PATH = ResourceManager.APP_DIR + "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = LogUtil.getLog(OsmandApplication.class);
@@ -53,6 +55,7 @@ public class OsmandApplication extends Application {
 	DayNightHelper daynightHelper;
 	NavigationService navigationService;
 	RendererRegistry rendererRegistry;
+	private BidForFixHelper bidforfix;
 	
 	
 	// start variables
@@ -74,6 +77,7 @@ public class OsmandApplication extends Application {
     	daynightHelper = new DayNightHelper(this);
     	uiHandler = new Handler();
     	rendererRegistry = new RendererRegistry();
+    	bidforfix = new BidForFixHelper("osmand.net", getString(R.string.default_buttons_support), getString(R.string.default_buttons_cancel));
     	checkPrefferedLocale();
     	startApplication();
     	if(LOG.isDebugEnabled()){
@@ -86,6 +90,9 @@ public class OsmandApplication extends Application {
     	super.onTerminate();
     	if (routingHelper != null) {
     		routingHelper.getVoiceRouter().onApplicationTerminate(getApplicationContext());
+    	}
+    	if (bidforfix != null) {
+    		bidforfix.onDestroy();
     	}
     }
     
@@ -270,6 +277,10 @@ public class OsmandApplication extends Application {
 	public void setNavigationService(NavigationService navigationService) {
 		this.navigationService = navigationService;
 	}
+
+	public BidForFixHelper getBidForFix() {
+		return bidforfix;
+	}
 	
 	public synchronized void closeApplication(){
 		if(applicationInitializing){
@@ -394,6 +405,4 @@ public class OsmandApplication extends Application {
 
 		}
 	}
-	
-	
 }
